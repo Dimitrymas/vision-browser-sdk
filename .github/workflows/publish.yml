@@ -1,0 +1,40 @@
+name: Build and Publish to PyPI
+
+on:
+  push:
+    tags:
+      - 'v*' # Запускать только при создании тега вида v1.2.3
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    # --- ДОБАВЛЕНО/ИЗМЕНЕНО ---
+    environment: pypi-publish # Указываем нашу защищенную среду
+    permissions:
+      id-token: write # Это разрешение необходимо для аутентификации в PyPI
+    # --- КОНЕЦ ИЗМЕНЕНИЙ ---
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Poetry
+        uses: snok/install-poetry@v1
+
+      - name: Install dependencies
+        run: poetry install --no-interaction
+
+      - name: Build package
+        run: poetry build
+
+      - name: Publish to PyPI
+        uses: pypa/gh-action-pypi-publish@release/v1
+        # --- ВАЖНОЕ ИЗМЕНЕНИЕ ---
+        # Мы больше НЕ используем 'user' и 'password' с токеном.
+        # Action автоматически получит временный токен от PyPI.
+        # --- КОНЕЦ ИЗМЕНЕНИЙ ---
