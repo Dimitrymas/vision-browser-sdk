@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "vision-browser-sdk"
-version = "0.1.0"
+version = "0.1.1"
 description = "Modern, fully-typed, sync and async Python SDK for the Vision Browser API."
 authors = ["Landerix <dimitrymasl@gmail.com>"]
 license = "MIT"
