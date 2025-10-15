@@ -63,14 +63,14 @@ class UpdateFolderPayload(BaseModel):
 
 class Geolocation(BaseModel):
     """Model for proxy geolocation information."""
-    ip: str
-    country: str
-    region: str
-    city: str
-    zipcode: str
-    timezone: str
-    latitude: float
-    longitude: float
+    ip: Optional[str] = None
+    country: Optional[str] = None
+    region: Optional[str] = None
+    city: Optional[str] = None
+    zipcode: Optional[str] = None
+    timezone: Optional[str] = None
+    latitude: Optional[float] = None
+    longitude: Optional[float] = None
 
 
 # --- Proxy Models (defined before Profile) ---
